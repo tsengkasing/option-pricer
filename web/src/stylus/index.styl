@@ -13,7 +13,8 @@ html, body, h1, h2, h3, h4, h5, h6, div, span, p
         text-align center
 
 .content
-    width 100%
+    margin 0 auto
+    max-width 1024px
     min-height calc(100vh - 12rem)
     display flex
     flex-flow row wrap
@@ -22,13 +23,14 @@ html, body, h1, h2, h3, h4, h5, h6, div, span, p
     & > *
         height 100%
     .nav
-        margin 0 16px
+        margin 0 32px
         flex 0 0 240px
         ul
-            border-right 1px solid #0AF
+            border-right 2px solid #0AF
             list-style none
             padding 0 8px
             li
+                border-radius 4px
                 cursor pointer
                 padding 32px 16px
                 transition all .2s ease-out

@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import blue from '@material-ui/core/colors/blue';
 import pink from '@material-ui/core/colors/pink';
-import Paper from '@material-ui/core/Paper';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 
 import EuropeanOption from './components/europeanOption';
+import ImpliedVolatility from './components/impliedVolatility';
+import AmericanOption from './components/americanOption';
+import GeometricAsianOption from './components/geometricAsianOption';
+import ArithmeticAsianOption from './components/arithmeticAsianOption';
+import GeometricBasketOption from './components/geometricBasketOption';
+import ArithmeticBasketOption from './components/arithmeticBasketOption';
 
 // App Theme
 const theme = createMuiTheme({
@@ -53,10 +56,27 @@ function App() {
                 </div>
                 <div className="tab-container"
                     style={{display: `${tabIndex === 1 ? 'block' : 'none'}`}}>
-
+                    <ImpliedVolatility />
                 </div>
                 <div className="tab-container"
                     style={{display: `${tabIndex === 2 ? 'block' : 'none'}`}}>
+                    <AmericanOption />
+                </div>
+                <div className="tab-container"
+                    style={{display: `${tabIndex === 3 ? 'block' : 'none'}`}}>
+                    <GeometricAsianOption />
+                </div>
+                <div className="tab-container"
+                    style={{display: `${tabIndex === 4 ? 'block' : 'none'}`}}>
+                    <ArithmeticAsianOption />
+                </div>
+                <div className="tab-container"
+                    style={{display: `${tabIndex === 5 ? 'block' : 'none'}`}}>
+                    <GeometricBasketOption />
+                </div>
+                <div className="tab-container"
+                    style={{display: `${tabIndex === 6 ? 'block' : 'none'}`}}>
+                    <ArithmeticBasketOption />
                 </div>
             </div>
         </MuiThemeProvider>

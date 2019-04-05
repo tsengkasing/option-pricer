@@ -6,30 +6,34 @@ import Button from '@material-ui/core/Button';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import { calcEuropeanOption } from '../util/api';
+import { calcGeometricBasketOption } from '../util/api';
 
-function EuropeanOption() {
+function GeometricBasketOption() {
     const [optionType, setOptionType] = useState('call');
-    const [S, setS] = useState(100);
-    const [sigma, setSigma] = useState(0.2);
+    const [S1, setS1] = useState(100);
+    const [S2, setS2] = useState(100);
+    const [sigma1, setSigma1] = useState(0.2);
+    const [sigma2, setSigma2] = useState(0.2);
     const [r, setR] = useState(0.01);
-    const [q, setQ] = useState(0.5);
     const [T, setT] = useState(0.5);
     const [K, setK] = useState(100);
+    const [correlation, setCorrelation] = useState(0.01);
     const [result, setResult] = useState(null);
 
     const handleInput = {
         'optionType': e => setOptionType(e.target.value),
-        'S': e => setS(e.target.value),
-        'sigma': e => setSigma(e.target.value),
+        'S1': e => setS1(e.target.value),
+        'S2': e => setS2(e.target.value),
+        'sigma1': e => setSigma1(e.target.value),
+        'sigma2': e => setSigma2(e.target.value),
         'r': e => setR(e.target.value),
-        'q': e => setQ(e.target.value),
         'T': e => setT(e.target.value),
         'K': e => setK(e.target.value),
+        'correlation': e => setCorrelation(e.target.value),
     };
 
     function handleCalculate() {
-        calcEuropeanOption(optionType, S, K, T, sigma, r, q).then(data => {
+        calcGeometricBasketOption(optionType, S1, S2, sigma1, sigma2, r, K, T, correlation).then(data => {
             setResult(data);
         }).catch(err => {
             alert(err);
@@ -60,18 +64,36 @@ function EuropeanOption() {
             <div className="input__layout">
                 <div className="input__field">
                     <TextField
-                        label="Spot price"
-                        value={S}
-                        onChange={handleInput['S']}
+                        label="Spot price 1"
+                        value={S1}
+                        onChange={handleInput['S1']}
                         margin="normal"
                         variant="outlined"
                     />
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Volatility"
-                        value={sigma}
-                        onChange={handleInput['sigma']}
+                        label="Spot price 2"
+                        value={S2}
+                        onChange={handleInput['S2']}
+                        margin="normal"
+                        variant="outlined"
+                    />
+                </div>
+                <div className="input__field">
+                    <TextField
+                        label="Volatility 1"
+                        value={sigma1}
+                        onChange={handleInput['sigma1']}
+                        margin="normal"
+                        variant="outlined"
+                    />
+                </div>
+                <div className="input__field">
+                    <TextField
+                        label="Volatility 2"
+                        value={sigma2}
+                        onChange={handleInput['sigma2']}
                         margin="normal"
                         variant="outlined"
                     />
@@ -81,15 +103,6 @@ function EuropeanOption() {
                         label="Risk-free Interest Rate"
                         value={r}
                         onChange={handleInput['r']}
-                        margin="normal"
-                        variant="outlined"
-                    />
-                </div>
-                <div className="input__field">
-                    <TextField
-                        label="Repo Rate"
-                        value={q}
-                        onChange={handleInput['q']}
                         margin="normal"
                         variant="outlined"
                     />
@@ -112,6 +125,15 @@ function EuropeanOption() {
                         variant="outlined"
                     />
                 </div>
+                <div className="input__field">
+                    <TextField
+                        label="Correlation"
+                        value={correlation}
+                        onChange={handleInput['correlation']}
+                        margin="normal"
+                        variant="outlined"
+                    />
+                </div>
             </div>
             <Button variant="contained" color="primary" onClick={handleCalculate}>Calculate</Button>
             {result !== null && <div className="calculated-result">
@@ -121,4 +143,4 @@ function EuropeanOption() {
     );
 }
 
-export default EuropeanOption;
+export default GeometricBasketOption;

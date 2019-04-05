@@ -6,16 +6,16 @@ import Button from '@material-ui/core/Button';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import { calcEuropeanOption } from '../util/api';
+import { calcGeometricAsianOption } from '../util/api';
 
-function EuropeanOption() {
+function GeometricAsianOption() {
     const [optionType, setOptionType] = useState('call');
     const [S, setS] = useState(100);
     const [sigma, setSigma] = useState(0.2);
     const [r, setR] = useState(0.01);
-    const [q, setQ] = useState(0.5);
     const [T, setT] = useState(0.5);
     const [K, setK] = useState(100);
+    const [n, setN] = useState(50);
     const [result, setResult] = useState(null);
 
     const handleInput = {
@@ -23,13 +23,13 @@ function EuropeanOption() {
         'S': e => setS(e.target.value),
         'sigma': e => setSigma(e.target.value),
         'r': e => setR(e.target.value),
-        'q': e => setQ(e.target.value),
         'T': e => setT(e.target.value),
         'K': e => setK(e.target.value),
+        'n': e => setN(e.target.value),
     };
 
     function handleCalculate() {
-        calcEuropeanOption(optionType, S, K, T, sigma, r, q).then(data => {
+        calcGeometricAsianOption(optionType, S, sigma, r, T, K, n).then(data => {
             setResult(data);
         }).catch(err => {
             alert(err);
@@ -87,15 +87,6 @@ function EuropeanOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Repo Rate"
-                        value={q}
-                        onChange={handleInput['q']}
-                        margin="normal"
-                        variant="outlined"
-                    />
-                </div>
-                <div className="input__field">
-                    <TextField
                         label="Time to Maturity"
                         value={T}
                         onChange={handleInput['T']}
@@ -112,6 +103,15 @@ function EuropeanOption() {
                         variant="outlined"
                     />
                 </div>
+                <div className="input__field">
+                    <TextField
+                        label="Number of observation times"
+                        value={n}
+                        onChange={handleInput['n']}
+                        margin="normal"
+                        variant="outlined"
+                    />
+                </div>
             </div>
             <Button variant="contained" color="primary" onClick={handleCalculate}>Calculate</Button>
             {result !== null && <div className="calculated-result">
@@ -121,4 +121,4 @@ function EuropeanOption() {
     );
 }
 
-export default EuropeanOption;
+export default GeometricAsianOption;

@@ -6,31 +6,42 @@ import Button from '@material-ui/core/Button';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import { calcEuropeanOption } from '../util/api';
+import Checkbox from '@material-ui/core/Checkbox';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { calcArithmeticAsianOption } from '../util/api';
 
-function EuropeanOption() {
+function ArithmeticAsianOption() {
     const [optionType, setOptionType] = useState('call');
     const [S, setS] = useState(100);
     const [sigma, setSigma] = useState(0.2);
     const [r, setR] = useState(0.01);
-    const [q, setQ] = useState(0.5);
     const [T, setT] = useState(0.5);
     const [K, setK] = useState(100);
+    const [n, setN] = useState(50);
+    const [m, setM] = useState(10000);
+    const [control, setControl] = useState(true);
+    const [seed, setSeed] = useState(10);
     const [result, setResult] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const handleInput = {
         'optionType': e => setOptionType(e.target.value),
         'S': e => setS(e.target.value),
         'sigma': e => setSigma(e.target.value),
         'r': e => setR(e.target.value),
-        'q': e => setQ(e.target.value),
         'T': e => setT(e.target.value),
         'K': e => setK(e.target.value),
+        'n': e => setN(e.target.value),
+        'm': e => setM(e.target.value),
+        'control': e => setControl(e.target.checked),
+        'seed': e => setSeed(e.target.value),
     };
 
     function handleCalculate() {
-        calcEuropeanOption(optionType, S, K, T, sigma, r, q).then(data => {
+        setLoading(true);
+        calcArithmeticAsianOption(optionType, S, sigma, r, T, K, n, m, control ? 1 : 0, seed).then(data => {
             setResult(data);
+            setLoading(false);
         }).catch(err => {
             alert(err);
         });
@@ -87,15 +98,6 @@ function EuropeanOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Repo Rate"
-                        value={q}
-                        onChange={handleInput['q']}
-                        margin="normal"
-                        variant="outlined"
-                    />
-                </div>
-                <div className="input__field">
-                    <TextField
                         label="Time to Maturity"
                         value={T}
                         onChange={handleInput['T']}
@@ -112,13 +114,50 @@ function EuropeanOption() {
                         variant="outlined"
                     />
                 </div>
+                <div className="input__field">
+                    <TextField
+                        label="Number of observation times"
+                        value={n}
+                        onChange={handleInput['n']}
+                        margin="normal"
+                        variant="outlined"
+                    />
+                </div>
+                <div className="input__field">
+                    <TextField
+                        label="Paths in the Monte Carlo simulation"
+                        value={m}
+                        onChange={handleInput['m']}
+                        margin="normal"
+                        variant="outlined"
+                    />
+                </div>
+                <div className="input__field">
+                    <label>Use control variate method</label>
+                    <Checkbox
+                      checked={control}
+                      onChange={handleInput['control']}
+                      value="control"
+                      color="primary"
+                    />
+                </div>
+                <div className="input__field">
+                    <TextField
+                        label="Seed"
+                        value={seed}
+                        onChange={handleInput['seed']}
+                        margin="normal"
+                        variant="outlined"
+                    />
+                </div>
             </div>
             <Button variant="contained" color="primary" onClick={handleCalculate}>Calculate</Button>
+            {loading && <div style={{margin: 16}}><CircularProgress /></div>}
             {result !== null && <div className="calculated-result">
-                <span>Result: {result}</span>
+                <span>Result: {result.join(' | ')}</span>
             </div>}
         </section>
     );
 }
 
-export default EuropeanOption;
+export default ArithmeticAsianOption;

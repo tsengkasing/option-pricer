@@ -6,22 +6,22 @@ import Button from '@material-ui/core/Button';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import { calcEuropeanOption } from '../util/api';
+import { calcImpliedVolatility } from '../util/api';
 
-function EuropeanOption() {
+function ImpliedVolatility() {
     const [optionType, setOptionType] = useState('call');
     const [S, setS] = useState(100);
-    const [sigma, setSigma] = useState(0.2);
     const [r, setR] = useState(0.01);
-    const [q, setQ] = useState(0.5);
-    const [T, setT] = useState(0.5);
+    const [q, setQ] = useState(1.0);
+    const [T, setT] = useState(1.0);
     const [K, setK] = useState(100);
+    const [optionPremium, setOptionPremium] = useState(1);
     const [result, setResult] = useState(null);
 
     const handleInput = {
         'optionType': e => setOptionType(e.target.value),
         'S': e => setS(e.target.value),
-        'sigma': e => setSigma(e.target.value),
+        'optionPremium': e => setOptionPremium(e.target.value),
         'r': e => setR(e.target.value),
         'q': e => setQ(e.target.value),
         'T': e => setT(e.target.value),
@@ -29,7 +29,7 @@ function EuropeanOption() {
     };
 
     function handleCalculate() {
-        calcEuropeanOption(optionType, S, K, T, sigma, r, q).then(data => {
+        calcImpliedVolatility(optionType, S, K, T, r, q, optionPremium).then(data => {
             setResult(data);
         }).catch(err => {
             alert(err);
@@ -63,15 +63,6 @@ function EuropeanOption() {
                         label="Spot price"
                         value={S}
                         onChange={handleInput['S']}
-                        margin="normal"
-                        variant="outlined"
-                    />
-                </div>
-                <div className="input__field">
-                    <TextField
-                        label="Volatility"
-                        value={sigma}
-                        onChange={handleInput['sigma']}
                         margin="normal"
                         variant="outlined"
                     />
@@ -112,6 +103,15 @@ function EuropeanOption() {
                         variant="outlined"
                     />
                 </div>
+                <div className="input__field">
+                    <TextField
+                        label="Option Premium"
+                        value={optionPremium}
+                        onChange={handleInput['optionPremium']}
+                        margin="normal"
+                        variant="outlined"
+                    />
+                </div>
             </div>
             <Button variant="contained" color="primary" onClick={handleCalculate}>Calculate</Button>
             {result !== null && <div className="calculated-result">
@@ -121,4 +121,4 @@ function EuropeanOption() {
     );
 }
 
-export default EuropeanOption;
+export default ImpliedVolatility;

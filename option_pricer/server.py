@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 
 import json
-from flask import Flask, request, make_response, send_file
+from flask import Flask, request, make_response
 from black_scholes import black_scholes
+from implied_volatility import calc_implied_volatility
 from closed_form_formulas import \
     geom_asian_call_option, \
     geom_asian_put_option, \
@@ -20,16 +21,14 @@ app = Flask(__name__, static_folder='static', static_url_path='')
 
 
 @app.route('/')
+@app.route('/index')
 def index():
-    return
+    return app.send_static_file('index.html')
 
 
 @app.route('/api/european_option/<option_type>', methods=['GET'])
-def european_call_option(option_type):
+def european_option(option_type):
     """European Option
-
-    test using
-    `curl http://localhost:3721/api/european_option/call?S=100&K=100&T=0.5&sigma=0.2&r=0.01&q=0.5`
 
     :param option_type: string
     :return: response
@@ -45,6 +44,42 @@ def european_call_option(option_type):
     except Exception as error:
         return response_json(1, str(error), None)
     return response_json(0, 'OK', option_value)
+
+
+@app.route('/api/implied_volatility/<option_type>', methods=['GET'])
+def implied_volatility(option_type):
+    """Implied Volatility
+
+    :param option_type: string
+    :return: response
+    """
+    S = request.args.get('S', type=float)
+    r = request.args.get('r', type=float)
+    q = request.args.get('q', type=float)
+    T = request.args.get('T', type=float)
+    K = request.args.get('K', type=float)
+    option_premium = request.args.get('optionPremium', type=float)
+    try:
+        option_value = calc_implied_volatility(option_type, S, K, T, r, option_premium, q)
+    except Exception as error:
+        return response_json(1, str(error), None)
+    return response_json(0, 'OK', option_value)
+
+
+@app.route('/api/american_option/<option_type>', methods=['GET'])
+def american_option(option_type):
+    """American Option
+
+    :param option_type: string
+    :return: response
+    """
+    S = request.args.get('S', type=float)
+    sigma = request.args.get('sigma', type=float)
+    r = request.args.get('r', type=float)
+    T = request.args.get('T', type=float)
+    K = request.args.get('K', type=float)
+    N = request.args.get('N', type=float)
+    return response_json(1, 'Not Implemented', None)
 
 
 @app.route('/api/geometric_asian_option/<option_type>', methods=['GET'])
@@ -164,4 +199,10 @@ def response_json(status, msg, data):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=3721, debug=True)
+    try:
+        import webbrowser
+        webbrowser.open('http://localhost:3721')
+    except:
+        print('Fail to open browser automatically.')
+    print('Please Open Browser and visit http://localhost:3721')
+    app.run(host='0.0.0.0', port=3721)
