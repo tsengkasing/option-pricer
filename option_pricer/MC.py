@@ -23,7 +23,7 @@ def Arith_Call_Option(S_0, sigma, r, T, K, n, m, control, seed):
         growthFactor = mu * np.exp(sigma * np.sqrt(Dt) * np.random.standard_normal())
         Spath = []
         Spath.append(S_0 * growthFactor)
-        for j in range(n):
+        for j in range(n-1):
             # from lecture 4, page 16
             growthFactor = mu * np.exp(sigma * np.sqrt(Dt)*np.random.standard_normal())
             Spath.append(Spath[-1] * growthFactor)
@@ -41,7 +41,6 @@ def Arith_Call_Option(S_0, sigma, r, T, K, n, m, control, seed):
         Z = arithPayoff + theta * (geo - geoPayoff)
         Zmean = np.mean(Z)
         Zstd = np.std(Z)
-        print(geo, Zmean, Zstd, np.mean(geoPayoff))
         return Zmean-1.96*Zstd/np.sqrt(m), Zmean+1.96*Zstd/np.sqrt(m)
     else:
         Pmean = np.mean(arithPayoff)
@@ -66,7 +65,7 @@ def Arith_Put_Option(S_0, sigma, r, T, K, n, m, control, seed):
         growthFactor = mu * np.exp(sigma * np.sqrt(Dt) * np.random.standard_normal())
         Spath = []
         Spath.append(S_0 * growthFactor)
-        for j in range(n):
+        for j in range(n-1):
             # from lecture 4, page 16
             growthFactor = mu * np.exp(sigma * np.sqrt(Dt)*np.random.standard_normal())
             Spath.append(Spath[-1] * growthFactor)
@@ -179,28 +178,28 @@ S = 100
 m = 100000
 
 # Arith_Call_Option(S_0, sigma, r, T, K, n, m, control, seed):
-# print( Arith_Call_Option(S, 0.3, r, T, 100, 50, m, False, 10) )
+print( Arith_Call_Option(S, 0.3, r, T, 100, 50, m, False, 10) )
 # print( Arith_Call_Option(S, 0.3, r, T, 100, 100, m, False, 10) )
 # print( Arith_Call_Option(S, 0.4, r, T, 100, 50, m, False, 10) )
 
-# print( Arith_Call_Option(S, 0.3, r, T, 100, 50, m, True, 10) )
+print( Arith_Call_Option(S, 0.3, r, T, 100, 50, m, True, 10) )
 # print( Arith_Call_Option(S, 0.3, r, T, 100, 100, m, True, 10) )
 # print( Arith_Call_Option(S, 0.4, r, T, 100, 50, m, True, 10) )
 
 
 # # # Arith_Put_Option(S_0, sigma, r, T, K, n, m, control, seed):
-# print( Arith_Put_Option(S, 0.3, r, T, 100, 50, m, False, 10) )
+print( Arith_Put_Option(S, 0.3, r, T, 100, 50, m, False, 10) )
 # print( Arith_Put_Option(S, 0.3, r, T, 100, 100, m, False, 10) )
 # print( Arith_Put_Option(S, 0.4, r, T, 100, 50, m, False, 10) )
 
-# print( Arith_Put_Option(S, 0.3, r, T, 100, 50, m, True, 10) )
+print( Arith_Put_Option(S, 0.3, r, T, 100, 50, m, True, 10) )
 # print( Arith_Put_Option(S, 0.3, r, T, 100, 100, m, True, 10) )
 # print( Arith_Put_Option(S, 0.4, r, T, 100, 50, m, True, 10) )
 
 
 # # Arith_Call_Basket(S_0_1, S_0_2, sigma_1, sigma_2, 
 # #                   r, T, K, rho, m, control, seed)
-print(Arith_Call_Basket(S, S, 0.3, 0.3, r, T, 100, 0.5, m, False, 10))
+# print(Arith_Call_Basket(S, S, 0.3, 0.3, r, T, 100, 0.5, m, False, 10))
 # print(Arith_Call_Basket(S, S, 0.3, 0.3, r, T, 100, 0.9, m, False, 10))
 # print(Arith_Call_Basket(S, S, 0.1, 0.3, r, T, 100, 0.5, m, False, 10))
 # print(Arith_Call_Basket(S, S, 0.3, 0.3, r, T, 80, 0.5, m, False, 10))
