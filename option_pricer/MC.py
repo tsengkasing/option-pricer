@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 created by @ Qiangyu YAN
 '''
@@ -31,10 +32,10 @@ def Arith_Call_Option(S_0, sigma, r, T, K, n, m, control, seed):
         arithMean = np.mean(Spath)
         arithPayoff.append(np.exp(-r*T) * max(arithMean - K, 0))
         # Geometric mean
-        if(control):
+        if control:
             geoMean = np.exp( (1/n) * np.sum(np.log(Spath)))
             geoPayoff.append(np.exp(-r*T) * max(geoMean - K, 0))
-    if(control):
+    if control:
         covXY = np.mean(np.multiply(arithPayoff,geoPayoff)) \
             - np.mean(arithPayoff) * np.mean(geoPayoff)
         theta = covXY / np.var(geoPayoff)
@@ -73,10 +74,10 @@ def Arith_Put_Option(S_0, sigma, r, T, K, n, m, control, seed):
         arithMean = np.mean(Spath)
         arithPayoff.append(np.exp(-r*T) * max(K - arithMean, 0))
         # Geometric mean
-        if(control):
+        if control:
             geoMean = np.exp( 1/n * np.sum(np.log(Spath)))
             geoPayoff.append(np.exp(-r*T) * max(K - geoMean, 0))
-    if(control):
+    if control:
         covXY = np.mean(np.multiply(arithPayoff,geoPayoff)) \
             - np.mean(arithPayoff) * np.mean(geoPayoff)
         theta = covXY / np.var(geoPayoff)
@@ -114,10 +115,10 @@ def Arith_Call_Basket(S_0_1, S_0_2, sigma_1, sigma_2, r, T, K, rho, m, control, 
         arithMean = np.mean(Spath)
         arithPayoff.append(np.exp(-r*T) * max(arithMean - K, 0))
         # Geometric mean
-        if(control):
+        if control:
             geoMean = np.exp( 0.5 * np.sum(np.log(Spath)))
             geoPayoff.append(np.exp(-r*T) * max(geoMean - K, 0))
-    if(control):
+    if control:
         covXY = np.mean(np.multiply(arithPayoff,geoPayoff)) \
             - np.mean(arithPayoff) * np.mean(geoPayoff)
         theta = covXY / np.var(geoPayoff)
@@ -154,10 +155,10 @@ def Arith_Put_Basket(S_0_1, S_0_2, sigma_1, sigma_2, r, T, K, rho, m, control, s
         arithMean = np.mean(Spath)
         arithPayoff.append(np.exp(-r*T) * max(K - arithMean, 0))
         # Geometric mean
-        if(control):
+        if control:
             geoMean = np.exp( 0.5 * np.sum(np.log(Spath)))
             geoPayoff.append(np.exp(-r*T) * max(K - geoMean, 0))
-    if(control):
+    if control:
         covXY = np.mean(np.multiply(arithPayoff,geoPayoff)) \
             - np.mean(arithPayoff) * np.mean(geoPayoff)
         theta = covXY / np.var(geoPayoff)

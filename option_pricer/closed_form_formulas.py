@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # Implemented:
 # 1 closed-form formulas for geometric Asian call/put options
 # 2 closed-from formulas for geometric basket call/put options
