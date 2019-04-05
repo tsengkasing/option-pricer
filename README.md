@@ -9,7 +9,7 @@
 请使用 Python 3.6+
 
 ```shell
-$ git clone https://githusb.com/tsengkasing/option-pricer.git
+$ git clone https://github.com/tsengkasing/option-pricer.git
 $ cd option-pricer
 $ pip install -r requirement.txt
 ```
