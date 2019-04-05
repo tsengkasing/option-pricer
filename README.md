@@ -25,7 +25,7 @@ $ pip install -r requirement.txt
 
 ```shell
 $ cd option-pricer
-$ python option-pricer/server.py
+$ python option_pricer/server.py
 ```
 
 然后打开浏览器，访问 ``http://localhost:3721``

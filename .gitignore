@@ -3,6 +3,7 @@
 
 # web
 node_modules
+pm2.config.js
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
