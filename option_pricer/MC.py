@@ -100,7 +100,6 @@ def Arith_Put_Option(S_0, sigma, r, T, K, n, m, control, seed):
 ##########################################
 def Arith_Call_Basket(S_0_1, S_0_2, sigma_1, sigma_2, r, T, K, rho, m, control, seed):
     geo = form.geom_basket_call_option(S_0_1, S_0_2, sigma_1, sigma_2, r, T, K, rho, t=0)
-    print(geo)
     np.random.seed(seed)
     arithPayoff, geoPayoff = [], []
     for i in range(m):
@@ -171,60 +170,65 @@ def Arith_Put_Basket(S_0_1, S_0_2, sigma_1, sigma_2, r, T, K, rho, m, control, s
         Pstd = np.std(arithPayoff)
         return Pmean-1.96*Pstd/np.sqrt(m), Pmean+1.96*Pstd/np.sqrt(m)
 
-
+'''
 r = 0.05
 T = 3
 S = 100
 m = 100000
 
 # Arith_Call_Option(S_0, sigma, r, T, K, n, m, control, seed):
+print("Arith_Call_Option: no control")
 print( Arith_Call_Option(S, 0.3, r, T, 100, 50, m, False, 10) )
-# print( Arith_Call_Option(S, 0.3, r, T, 100, 100, m, False, 10) )
-# print( Arith_Call_Option(S, 0.4, r, T, 100, 50, m, False, 10) )
-
+print( Arith_Call_Option(S, 0.3, r, T, 100, 100, m, False, 10) )
+print( Arith_Call_Option(S, 0.4, r, T, 100, 50, m, False, 10) )
+print("Arith_Call_Option:")
 print( Arith_Call_Option(S, 0.3, r, T, 100, 50, m, True, 10) )
-# print( Arith_Call_Option(S, 0.3, r, T, 100, 100, m, True, 10) )
-# print( Arith_Call_Option(S, 0.4, r, T, 100, 50, m, True, 10) )
+print( Arith_Call_Option(S, 0.3, r, T, 100, 100, m, True, 10) )
+print( Arith_Call_Option(S, 0.4, r, T, 100, 50, m, True, 10) )
 
 
-# # # Arith_Put_Option(S_0, sigma, r, T, K, n, m, control, seed):
+# Arith_Put_Option(S_0, sigma, r, T, K, n, m, control, seed):
+print("Arith_Put_Option: no control")
 print( Arith_Put_Option(S, 0.3, r, T, 100, 50, m, False, 10) )
-# print( Arith_Put_Option(S, 0.3, r, T, 100, 100, m, False, 10) )
-# print( Arith_Put_Option(S, 0.4, r, T, 100, 50, m, False, 10) )
-
+print( Arith_Put_Option(S, 0.3, r, T, 100, 100, m, False, 10) )
+print( Arith_Put_Option(S, 0.4, r, T, 100, 50, m, False, 10) )
+print("Arith_Put_Option:")
 print( Arith_Put_Option(S, 0.3, r, T, 100, 50, m, True, 10) )
-# print( Arith_Put_Option(S, 0.3, r, T, 100, 100, m, True, 10) )
-# print( Arith_Put_Option(S, 0.4, r, T, 100, 50, m, True, 10) )
+print( Arith_Put_Option(S, 0.3, r, T, 100, 100, m, True, 10) )
+print( Arith_Put_Option(S, 0.4, r, T, 100, 50, m, True, 10) )
 
 
 # # Arith_Call_Basket(S_0_1, S_0_2, sigma_1, sigma_2, 
 # #                   r, T, K, rho, m, control, seed)
-# print(Arith_Call_Basket(S, S, 0.3, 0.3, r, T, 100, 0.5, m, False, 10))
-# print(Arith_Call_Basket(S, S, 0.3, 0.3, r, T, 100, 0.9, m, False, 10))
-# print(Arith_Call_Basket(S, S, 0.1, 0.3, r, T, 100, 0.5, m, False, 10))
-# print(Arith_Call_Basket(S, S, 0.3, 0.3, r, T, 80, 0.5, m, False, 10))
-# print(Arith_Call_Basket(S, S, 0.3, 0.3, r, T, 120, 0.5, m, False, 10))
-# print(Arith_Call_Basket(S, S, 0.5, 0.5, r, T, 100, 0.5, m, False, 10))
-
-# print(Arith_Call_Basket(S, S, 0.3, 0.3, r, T, 100, 0.5, m, True, 10))
-# print(Arith_Call_Basket(S, S, 0.3, 0.3, r, T, 100, 0.9, m, True, 10))
-# print(Arith_Call_Basket(S, S, 0.1, 0.3, r, T, 100, 0.5, m, True, 10))
-# print(Arith_Call_Basket(S, S, 0.3, 0.3, r, T, 80, 0.5, m, True, 10))
-# print(Arith_Call_Basket(S, S, 0.3, 0.3, r, T, 120, 0.5, m, True, 10))
-# print(Arith_Call_Basket(S, S, 0.5, 0.5, r, T, 100, 0.5, m, True, 10))
+print("Arith_Call_Basket: no control")
+print(Arith_Call_Basket(S, S, 0.3, 0.3, r, T, 100, 0.5, m, False, 10))
+print(Arith_Call_Basket(S, S, 0.3, 0.3, r, T, 100, 0.9, m, False, 10))
+print(Arith_Call_Basket(S, S, 0.1, 0.3, r, T, 100, 0.5, m, False, 10))
+print(Arith_Call_Basket(S, S, 0.3, 0.3, r, T, 80, 0.5, m, False, 10))
+print(Arith_Call_Basket(S, S, 0.3, 0.3, r, T, 120, 0.5, m, False, 10))
+print(Arith_Call_Basket(S, S, 0.5, 0.5, r, T, 100, 0.5, m, False, 10))
+print("Arith_Call_Basket:")
+print(Arith_Call_Basket(S, S, 0.3, 0.3, r, T, 100, 0.5, m, True, 10))
+print(Arith_Call_Basket(S, S, 0.3, 0.3, r, T, 100, 0.9, m, True, 10))
+print(Arith_Call_Basket(S, S, 0.1, 0.3, r, T, 100, 0.5, m, True, 10))
+print(Arith_Call_Basket(S, S, 0.3, 0.3, r, T, 80, 0.5, m, True, 10))
+print(Arith_Call_Basket(S, S, 0.3, 0.3, r, T, 120, 0.5, m, True, 10))
+print(Arith_Call_Basket(S, S, 0.5, 0.5, r, T, 100, 0.5, m, True, 10))
 
 # # Arith_Call_Basket(S_0_1, S_0_2, sigma_1, sigma_2, 
 # #                   r, T, K, rho, m, control, seed)
-# print(Arith_Put_Basket(S, S, 0.3, 0.3, r, T, 100, 0.5, m, False, 10))
-# print(Arith_Put_Basket(S, S, 0.3, 0.3, r, T, 100, 0.9, m, False, 10))
-# print(Arith_Put_Basket(S, S, 0.1, 0.3, r, T, 100, 0.5, m, False, 10))
-# print(Arith_Put_Basket(S, S, 0.3, 0.3, r, T, 80, 0.5, m, False, 10))
-# print(Arith_Put_Basket(S, S, 0.3, 0.3, r, T, 120, 0.5, m, False, 10))
-# print(Arith_Put_Basket(S, S, 0.5, 0.5, r, T, 100, 0.5, m, False, 10))
-
-# print(Arith_Put_Basket(S, S, 0.3, 0.3, r, T, 100, 0.5, m, True, 10))
-# print(Arith_Put_Basket(S, S, 0.3, 0.3, r, T, 100, 0.9, m, True, 10))
-# print(Arith_Put_Basket(S, S, 0.1, 0.3, r, T, 100, 0.5, m, True, 10))
-# print(Arith_Put_Basket(S, S, 0.3, 0.3, r, T, 80, 0.5, m, True, 10))
-# print(Arith_Put_Basket(S, S, 0.3, 0.3, r, T, 120, 0.5, m, True, 10))
-# print(Arith_Put_Basket(S, S, 0.5, 0.5, r, T, 100, 0.5, m, True, 10))
+print("Arith_Put_Basket: no control")
+print(Arith_Put_Basket(S, S, 0.3, 0.3, r, T, 100, 0.5, m, False, 10))
+print(Arith_Put_Basket(S, S, 0.3, 0.3, r, T, 100, 0.9, m, False, 10))
+print(Arith_Put_Basket(S, S, 0.1, 0.3, r, T, 100, 0.5, m, False, 10))
+print(Arith_Put_Basket(S, S, 0.3, 0.3, r, T, 80, 0.5, m, False, 10))
+print(Arith_Put_Basket(S, S, 0.3, 0.3, r, T, 120, 0.5, m, False, 10))
+print(Arith_Put_Basket(S, S, 0.5, 0.5, r, T, 100, 0.5, m, False, 10))
+print("Arith_Put_Basket:")
+print(Arith_Put_Basket(S, S, 0.3, 0.3, r, T, 100, 0.5, m, True, 10))
+print(Arith_Put_Basket(S, S, 0.3, 0.3, r, T, 100, 0.9, m, True, 10))
+print(Arith_Put_Basket(S, S, 0.1, 0.3, r, T, 100, 0.5, m, True, 10))
+print(Arith_Put_Basket(S, S, 0.3, 0.3, r, T, 80, 0.5, m, True, 10))
+print(Arith_Put_Basket(S, S, 0.3, 0.3, r, T, 120, 0.5, m, True, 10))
+print(Arith_Put_Basket(S, S, 0.5, 0.5, r, T, 100, 0.5, m, True, 10))
+'''

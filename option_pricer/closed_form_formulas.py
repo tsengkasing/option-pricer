@@ -83,8 +83,9 @@ def geom_basket_call_option(s_t_1, s_t_2, sigma_1, sigma_2, r, T, K, rho, t=0):
     """
     _T = T-t
 
-    _sigma_sq_T = sigma_1*sigma_2*rho/(2*2)*_T # (sigma^2)*T, convience for latter calculation
-    _mu_T = r*_T - 0.5*(sigma_1*sigma_1+sigma_2*sigma_2)/2*_T + 0.5*_sigma_sq_T/_T
+    _sigma_sq_T = (2*sigma_1*sigma_2*rho + sigma_1*sigma_1 + \
+        sigma_2*sigma_2) / (2*2) *_T # (sigma^2)*T, convience for latter calculation
+    _mu_T = r*_T - 0.5*(sigma_1*sigma_1+sigma_2*sigma_2)/2*_T + 0.5*_sigma_sq_T
 
     _B_t = np.sqrt(s_t_1*s_t_2)
 
@@ -116,8 +117,9 @@ def geom_basket_put_option(s_t_1, s_t_2, sigma_1, sigma_2, r, T, K, rho, t=0):
     """
     _T = T-t
 
-    _sigma_sq_T = sigma_1*sigma_2*rho/(2*2)*_T # (sigma^2)*T, convience for latter calculation
-    _mu_T = r*_T - 0.5*(sigma_1*sigma_1+sigma_2*sigma_2)/2*_T + 0.5*_sigma_sq_T/_T
+    _sigma_sq_T = (2*sigma_1*sigma_2*rho + sigma_1*sigma_1 + \
+        sigma_2*sigma_2) / (2*2) *_T # (sigma^2)*T, convience for latter calculation
+    _mu_T = r*_T - 0.5*(sigma_1*sigma_1+sigma_2*sigma_2)/2*_T + 0.5*_sigma_sq_T
 
     _B_t = np.sqrt(s_t_1*s_t_2)
 
