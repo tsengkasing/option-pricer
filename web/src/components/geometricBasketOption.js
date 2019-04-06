@@ -12,12 +12,12 @@ function GeometricBasketOption() {
     const [optionType, setOptionType] = useState('call');
     const [S1, setS1] = useState(100);
     const [S2, setS2] = useState(100);
-    const [sigma1, setSigma1] = useState(0.2);
-    const [sigma2, setSigma2] = useState(0.2);
-    const [r, setR] = useState(0.01);
-    const [T, setT] = useState(0.5);
+    const [sigma1, setSigma1] = useState(0.3);
+    const [sigma2, setSigma2] = useState(0.3);
+    const [r, setR] = useState(0.05);
+    const [T, setT] = useState(3.0);
     const [K, setK] = useState(100);
-    const [correlation, setCorrelation] = useState(0.01);
+    const [correlation, setCorrelation] = useState(0.5);
     const [result, setResult] = useState(null);
 
     const handleInput = {
