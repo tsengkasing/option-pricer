@@ -44,7 +44,7 @@ function ArithmeticBasketOption() {
     function handleCalculate() {
         setLoading(true);
         calcArithmeticBasketOption(
-            optionType, S1, S2, sigma1, sigma2, r, K, T, correlation, m, control ? 1 : 0, seed
+            optionType, S1, S2, sigma1, sigma2, r, T, K, correlation, m, control ? 1 : 0, seed
         ).then(data => {
             setResult(data);
             setLoading(false);

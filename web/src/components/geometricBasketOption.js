@@ -36,7 +36,7 @@ function GeometricBasketOption() {
 
     function handleCalculate() {
         setLoading(true);
-        calcGeometricBasketOption(optionType, S1, S2, sigma1, sigma2, r, K, T, correlation).then(data => {
+        calcGeometricBasketOption(optionType, S1, S2, sigma1, sigma2, r, T, K, correlation).then(data => {
             setResult(data);
             setLoading(false);
         }).catch(err => {
