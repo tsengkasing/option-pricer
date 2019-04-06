@@ -44,6 +44,7 @@ function ArithmeticAsianOption() {
             setLoading(false);
         }).catch(err => {
             alert(err);
+            setLoading(false);
         });
     }
 
@@ -71,7 +72,7 @@ function ArithmeticAsianOption() {
             <div className="input__layout">
                 <div className="input__field">
                     <TextField
-                        label="Spot price"
+                        label="Spot price - S(0)"
                         value={S}
                         onChange={handleInput['S']}
                         margin="normal"
@@ -80,7 +81,7 @@ function ArithmeticAsianOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Volatility"
+                        label="Volatility - σ"
                         value={sigma}
                         onChange={handleInput['sigma']}
                         margin="normal"
@@ -89,7 +90,7 @@ function ArithmeticAsianOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Risk-free Interest Rate"
+                        label="Risk-free Interest Rate - r"
                         value={r}
                         onChange={handleInput['r']}
                         margin="normal"
@@ -98,7 +99,7 @@ function ArithmeticAsianOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Time to Maturity"
+                        label="Time to Maturity - T"
                         value={T}
                         onChange={handleInput['T']}
                         margin="normal"
@@ -107,7 +108,7 @@ function ArithmeticAsianOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Strike"
+                        label="Strike - K"
                         value={K}
                         onChange={handleInput['K']}
                         margin="normal"
@@ -116,7 +117,7 @@ function ArithmeticAsianOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Number of observation times"
+                        label="Number of observation times - n"
                         value={n}
                         onChange={handleInput['n']}
                         margin="normal"
@@ -125,7 +126,7 @@ function ArithmeticAsianOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Paths in the Monte Carlo simulation"
+                        label="Paths in the Monte Carlo simulation - m"
                         value={m}
                         onChange={handleInput['m']}
                         margin="normal"

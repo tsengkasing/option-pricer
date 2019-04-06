@@ -50,6 +50,7 @@ function ArithmeticBasketOption() {
             setLoading(false);
         }).catch(err => {
             alert(err);
+            setLoading(false);
         });
     }
 
@@ -77,7 +78,7 @@ function ArithmeticBasketOption() {
             <div className="input__layout">
                 <div className="input__field">
                     <TextField
-                        label="Spot price 1"
+                        label="Spot price 1 - S1(0)"
                         value={S1}
                         onChange={handleInput['S1']}
                         margin="normal"
@@ -86,7 +87,7 @@ function ArithmeticBasketOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Spot price 2"
+                        label="Spot price 2 - S2(0)"
                         value={S2}
                         onChange={handleInput['S2']}
                         margin="normal"
@@ -95,7 +96,7 @@ function ArithmeticBasketOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Volatility 1"
+                        label="Volatility 1 - σ1"
                         value={sigma1}
                         onChange={handleInput['sigma1']}
                         margin="normal"
@@ -104,7 +105,7 @@ function ArithmeticBasketOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Volatility 2"
+                        label="Volatility 2 - σ2"
                         value={sigma2}
                         onChange={handleInput['sigma2']}
                         margin="normal"
@@ -113,7 +114,7 @@ function ArithmeticBasketOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Risk-free Interest Rate"
+                        label="Risk-free Interest Rate - r"
                         value={r}
                         onChange={handleInput['r']}
                         margin="normal"
@@ -122,7 +123,7 @@ function ArithmeticBasketOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Time to Maturity"
+                        label="Time to Maturity - T"
                         value={T}
                         onChange={handleInput['T']}
                         margin="normal"
@@ -131,7 +132,7 @@ function ArithmeticBasketOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Strike"
+                        label="Strike - K"
                         value={K}
                         onChange={handleInput['K']}
                         margin="normal"
@@ -140,7 +141,7 @@ function ArithmeticBasketOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Correlation"
+                        label="Correlation - ρ"
                         value={correlation}
                         onChange={handleInput['correlation']}
                         margin="normal"
@@ -149,7 +150,7 @@ function ArithmeticBasketOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Paths in the Monte Carlo simulation"
+                        label="Paths in the Monte Carlo simulation - m"
                         value={m}
                         onChange={handleInput['m']}
                         margin="normal"

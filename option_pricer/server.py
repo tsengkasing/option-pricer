@@ -2,9 +2,11 @@
 # -*- coding: utf-8 -*-
 
 import json
+from math import isnan
 from flask import Flask, request, make_response
 from black_scholes import black_scholes
 from implied_volatility import calc_implied_volatility
+from binomial_tree import american_call_binomial_tree, american_put_binomial_tree
 from closed_form_formulas import \
     geom_asian_call_option, \
     geom_asian_put_option, \
@@ -79,7 +81,13 @@ def american_option(option_type):
     T = request.args.get('T', type=float)
     K = request.args.get('K', type=float)
     N = request.args.get('N', type=float)
-    return response_json(1, 'Not Implemented', None)
+    if option_type == 'call':
+        option_value = american_call_binomial_tree(S, sigma, r, T, K, N)
+    elif option_type == 'put':
+        option_value = american_put_binomial_tree(S, sigma, r, T, K, N)
+    else:
+        return response_json(1, 'Error Option Type', None)
+    return response_json(0, 'OK', option_value)
 
 
 @app.route('/api/geometric_asian_option/<option_type>', methods=['GET'])
@@ -121,12 +129,16 @@ def arithmetic_asian_option(option_type):
     control = request.args.get('control', type=int) == 1  # True | False
     seed = request.args.get('seed', type=int)
     if option_type == 'call':
-        option_value = Arith_Call_Option(S, sigma, r, T, K, n, m, control, seed)
+        option_value1, option_value2 = Arith_Call_Option(S, sigma, r, T, K, n, m, control, seed)
     elif option_type == 'put':
-        option_value = Arith_Put_Option(S, sigma, r, T, K, n, m, control, seed)
+        option_value1, option_value2 = Arith_Put_Option(S, sigma, r, T, K, n, m, control, seed)
     else:
         return response_json(1, 'Error Option Type', None)
-    return response_json(0, 'OK', option_value)
+    if isnan(option_value1):
+        option_value1 = 'NaN'
+    if isnan(option_value2):
+        option_value2 = 'NaN'
+    return response_json(0, 'OK', [option_value1, option_value2])
 
 
 @app.route('/api/geometric_basket_option/<option_type>', methods=['GET'])

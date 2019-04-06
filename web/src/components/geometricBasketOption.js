@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { calcGeometricBasketOption } from '../util/api';
 
 function GeometricBasketOption() {
@@ -19,6 +20,7 @@ function GeometricBasketOption() {
     const [K, setK] = useState(100);
     const [correlation, setCorrelation] = useState(0.5);
     const [result, setResult] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const handleInput = {
         'optionType': e => setOptionType(e.target.value),
@@ -33,10 +35,13 @@ function GeometricBasketOption() {
     };
 
     function handleCalculate() {
+        setLoading(true);
         calcGeometricBasketOption(optionType, S1, S2, sigma1, sigma2, r, K, T, correlation).then(data => {
             setResult(data);
+            setLoading(false);
         }).catch(err => {
             alert(err);
+            setLoading(false);
         });
     }
 
@@ -64,7 +69,7 @@ function GeometricBasketOption() {
             <div className="input__layout">
                 <div className="input__field">
                     <TextField
-                        label="Spot price 1"
+                        label="Spot price 1 - S1(0)"
                         value={S1}
                         onChange={handleInput['S1']}
                         margin="normal"
@@ -73,7 +78,7 @@ function GeometricBasketOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Spot price 2"
+                        label="Spot price 2 - S2(0)"
                         value={S2}
                         onChange={handleInput['S2']}
                         margin="normal"
@@ -82,7 +87,7 @@ function GeometricBasketOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Volatility 1"
+                        label="Volatility 1 - σ1"
                         value={sigma1}
                         onChange={handleInput['sigma1']}
                         margin="normal"
@@ -91,7 +96,7 @@ function GeometricBasketOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Volatility 2"
+                        label="Volatility 2 - σ2"
                         value={sigma2}
                         onChange={handleInput['sigma2']}
                         margin="normal"
@@ -100,7 +105,7 @@ function GeometricBasketOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Risk-free Interest Rate"
+                        label="Risk-free Interest Rate - r"
                         value={r}
                         onChange={handleInput['r']}
                         margin="normal"
@@ -109,7 +114,7 @@ function GeometricBasketOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Time to Maturity"
+                        label="Time to Maturity - T"
                         value={T}
                         onChange={handleInput['T']}
                         margin="normal"
@@ -118,7 +123,7 @@ function GeometricBasketOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Strike"
+                        label="Strike - K"
                         value={K}
                         onChange={handleInput['K']}
                         margin="normal"
@@ -127,7 +132,7 @@ function GeometricBasketOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Correlation"
+                        label="Correlation - ρ"
                         value={correlation}
                         onChange={handleInput['correlation']}
                         margin="normal"
@@ -136,6 +141,7 @@ function GeometricBasketOption() {
                 </div>
             </div>
             <Button variant="contained" color="primary" onClick={handleCalculate}>Calculate</Button>
+            {loading && <div style={{margin: 16}}><CircularProgress /></div>}
             {result !== null && <div className="calculated-result">
                 <span>Result: {result}</span>
             </div>}

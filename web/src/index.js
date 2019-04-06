@@ -49,7 +49,7 @@ function App() {
                 </ul>
             </nav>
             <div className="container">
-                <h3>{tabsName[tabIndex]}</h3>
+                <h3 className="tab__title">{tabsName[tabIndex]}</h3>
                 <div className="tab-container"
                     style={{display: `${tabIndex === 0 ? 'block' : 'none'}`}}>
                     <EuropeanOption />

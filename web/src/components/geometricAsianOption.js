@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { calcGeometricAsianOption } from '../util/api';
 
 function GeometricAsianOption() {
@@ -17,6 +18,7 @@ function GeometricAsianOption() {
     const [K, setK] = useState(100);
     const [n, setN] = useState(50);
     const [result, setResult] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const handleInput = {
         'optionType': e => setOptionType(e.target.value),
@@ -29,10 +31,13 @@ function GeometricAsianOption() {
     };
 
     function handleCalculate() {
+        setLoading(true);
         calcGeometricAsianOption(optionType, S, sigma, r, T, K, n).then(data => {
             setResult(data);
+            setLoading(false);
         }).catch(err => {
             alert(err);
+            setLoading(false);
         });
     }
 
@@ -60,7 +65,7 @@ function GeometricAsianOption() {
             <div className="input__layout">
                 <div className="input__field">
                     <TextField
-                        label="Spot price"
+                        label="Spot price - S(0)"
                         value={S}
                         onChange={handleInput['S']}
                         margin="normal"
@@ -69,7 +74,7 @@ function GeometricAsianOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Volatility"
+                        label="Volatility - σ"
                         value={sigma}
                         onChange={handleInput['sigma']}
                         margin="normal"
@@ -78,7 +83,7 @@ function GeometricAsianOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Risk-free Interest Rate"
+                        label="Risk-free Interest Rate - r"
                         value={r}
                         onChange={handleInput['r']}
                         margin="normal"
@@ -87,7 +92,7 @@ function GeometricAsianOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Time to Maturity"
+                        label="Time to Maturity - T"
                         value={T}
                         onChange={handleInput['T']}
                         margin="normal"
@@ -96,7 +101,7 @@ function GeometricAsianOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Strike"
+                        label="Strike - K"
                         value={K}
                         onChange={handleInput['K']}
                         margin="normal"
@@ -105,7 +110,7 @@ function GeometricAsianOption() {
                 </div>
                 <div className="input__field">
                     <TextField
-                        label="Number of observation times"
+                        label="Number of observation times - n"
                         value={n}
                         onChange={handleInput['n']}
                         margin="normal"
@@ -114,6 +119,7 @@ function GeometricAsianOption() {
                 </div>
             </div>
             <Button variant="contained" color="primary" onClick={handleCalculate}>Calculate</Button>
+            {loading && <div style={{margin: 16}}><CircularProgress /></div>}
             {result !== null && <div className="calculated-result">
                 <span>Result: {result}</span>
             </div>}
