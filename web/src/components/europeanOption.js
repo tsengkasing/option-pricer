@@ -14,7 +14,7 @@ function EuropeanOption() {
     const [S, setS] = useState(100);
     const [sigma, setSigma] = useState(0.3);
     const [r, setR] = useState(0.05);
-    const [q, setQ] = useState(0.5);
+    const [q, setQ] = useState(0.2);
     const [T, setT] = useState(3);
     const [K, setK] = useState(100);
     const [result, setResult] = useState(null);

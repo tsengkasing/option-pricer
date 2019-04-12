@@ -13,10 +13,10 @@ function ImpliedVolatility() {
     const [optionType, setOptionType] = useState('call');
     const [S, setS] = useState(100);
     const [r, setR] = useState(0.05);
-    const [q, setQ] = useState(1.0);
-    const [T, setT] = useState(3);
+    const [q, setQ] = useState(0.2);
+    const [T, setT] = useState(1);
     const [K, setK] = useState(100);
-    const [optionPremium, setOptionPremium] = useState(1);
+    const [optionPremium, setOptionPremium] = useState(25);
     const [result, setResult] = useState(null);
     const [loading, setLoading] = useState(false);
 

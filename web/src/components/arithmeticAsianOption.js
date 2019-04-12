@@ -18,7 +18,7 @@ function ArithmeticAsianOption() {
     const [T, setT] = useState(3.0);
     const [K, setK] = useState(100);
     const [n, setN] = useState(50);
-    const [m, setM] = useState(100000);
+    const [m, setM] = useState(100);
     const [control, setControl] = useState(true);
     const [seed, setSeed] = useState(10);
     const [result, setResult] = useState(null);

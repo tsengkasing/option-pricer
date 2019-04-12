@@ -20,7 +20,7 @@ function ArithmeticBasketOption() {
     const [T, setT] = useState(3.0);
     const [K, setK] = useState(100);
     const [correlation, setCorrelation] = useState(0.5);
-    const [m, setM] = useState(100000);
+    const [m, setM] = useState(100);
     const [control, setControl] = useState(true);
     const [seed, setSeed] = useState(10);
     const [result, setResult] = useState(null);
