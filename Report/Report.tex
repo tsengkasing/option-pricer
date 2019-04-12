@@ -98,7 +98,7 @@
     \newpage
     \section{Functionalities Explanation}
     \begin{verbatim}
-    .                               # For more details, please refer to source code.
+    .                               # For more details, please refer to source codes.
     |-- option_pricer
     |   |-- binomial_tree.py        # American options
     |   |-- black_scholes.py        # European options
@@ -112,20 +112,27 @@
     |-- web                         # Web User Interface source code
     \end{verbatim}
 
+    Due to the page limitation, we do not list all the details.
+    If you feel any doubts, please email to
+    \texttt{qiangyuyan@gmail.com} or 
+    our school emails(\texttt{.@hku.hk}).
     
 
 
     \section{Test cases and analysis} 
 
-    Form previous knowledges, we know that 
-    the correlation of the variates and values 
-    may not be monotance, 
+    Form previous knowledges (Black-Sholes formula), 
+    we know that 
+    there maybe some variables that
+    the option value may not be monotone
+    respect to one of them, 
     so all the analysis only based on the testing
-    result, which means it may variates
-    under different conditions.
+    result, which means it may be slightly different
+    under other conditions.
     
     \begin{table}[h]
         \caption{European Option}
+        \label{T1}
         \centering
         \scalebox{0.82}{
         \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
@@ -244,14 +251,16 @@
     \end{table}
 
 
-    (need to revise)From Table 2, 
+    From \hyperref[T2]{Table 2}, 
     we can get: Based on Case 0,
-    (1) Call Option value will increase(decrease) when 
-    $ S(0) / \sigma / r$ increase(decrease), or
-    $ K / T / q$ decrease/increase; 
-    (2) Put Option value will increase(decrease) when
-    $ K / T / q / \sigma $ increase(decrease), or
-    $ S(0) / r$ decrease(increase).
+    (1) Implied Volatility of Call Option
+    will increase(decrease) when 
+    $ Option Price / K / q $ increase(decrease), or
+    $ S(0) / T / r$ decrease/increase; 
+    (2) Implied Volatility of Put Option
+    will increase(decrease) when
+    $ Option Price / S(0) / r$ increase(decrease), or
+    $ K / T / q $ decrease(increase).
 
 
 
@@ -352,6 +361,14 @@
 
 
 
+
+
+
+
+
+
+
+
     \newpage
     \begin{table}[htbp]
         \label{T4}
@@ -364,50 +381,50 @@
             $\sigma$ & $r$ & $n$ & Call & Put\\
             \hline
             0 & 100 & 100 & 3 & 0.3 & 0.05 & 50
-            &  &  \\
+            & 13.2591 & 8.4827 \\
             \hline
             1+ & \textbf{120} & 100 & 3 & 0.3 & 0.05 & 50
-            &  &  \\
+            & 26.6181 & 3.6722 \\
             \hline
             1- & \textbf{80} & 100 & 3 & 0.3 & 0.05 & 50
-            &  &  \\
+            & 4.3379 & 17.7309 \\
             \hline
             2+ & 100 & \textbf{120} & 3 & 0.3 & 0.05 & 50
-            &  &  \\
+            & 6.5450 & 18.9828 \\
             \hline
             2- & 100 & \textbf{80} & 3 & 0.3 & 0.05 & 50
-            &  &  \\
+            & 24.3475 & 2.3569 \\
             \hline
             3+ & 100 & 100 & \textbf{4} & 0.3 & 0.05 & 50
-            &  &  \\
+            & 15.1536 & 9.0403 \\
             \hline
             3- & 100 & 100 & \textbf{2} & 0.3 & 0.05 & 50
-            &  &  \\
+            & 10.8693 & 7.5519 \\
             \hline
             4+ & 100 & 100 & 3 & \textbf{0.4} & 0.05 & 50
-            &  &  \\
+            & 15.7598 & 12.5588 \\
             \hline
             4- & 100 & 100 & 3 & \textbf{0.2} & 0.05 & 50
-            &  &  \\
+            & 10.5384 & 4.6197 \\
             \hline
             5+ & 100 & 100 & 3 & 0.3 & \textbf{0.10} & 50
-            &  &  \\
+            & 15.6126 & 5.2850 \\
             \hline
             5- & 100 & 100 & 3 & 0.3 & \textbf{0.03} & 50
-            &  &  \\
+            & 12.3055 & 10.1408 \\
             \hline
             6+ & 100 & 100 & 3 & 0.3 & 0.05 & \textbf{100}
-            &  &  \\
+            & 13.1388 & 8.4311 \\
             \hline
             6- & 100 & 100 & 3 & 0.3 & 0.05 & \textbf{30}
-            &  &  \\
+            & 13.4200 & 8.5513 \\
             \hline
     \end{tabular}
         }
     \end{table}
 
     
-    (need to revise)From \hyperref[T4]{Table 4}, we can get: Based on Case 0,
+    From \hyperref[T4]{Table 4}, we can get: Based on Case 0,
     (1) Call Option value will increase(decrease) when 
     $ S(0) /  T / \sigma / r$ increase(decrease), or
     $ K$ decrease/increase; 
@@ -489,11 +506,11 @@
         }
         \footnotesize
 
-    Default random seed is 10. 
-    Case $0^*$ is using 5 as random seed.
-
     $Call_0$ and $Put_0$ are the result without control,
     $Call_1$ and $Put_1$ are the result with control variate.
+
+    Default random seed is 10. 
+    Case $0^*$ is using 5 as random seed.
     \end{table}
 
     From \hyperref[T5]{Table 5}, we can get: Based on Case 0,
@@ -567,14 +584,13 @@
         }
     \end{table}
 
-    ()From \hyperref[T6]{Table 6}, we can get: Based on Case 0,
-    (1) Call Option value will increase(decrease) when 
-    $ S(0) /  T / \sigma / r$ increase(decrease), or
-    $ K$ decrease/increase; 
-    (2) Put Option value will increase(decrease) when
-    $ K / T / \sigma $ increase(decrease), or
-    $ S(0) / r$ decrease(increase);
-    (3) $n$ usually won't affect the option value a lot.
+    From \hyperref[T6]{Table 6}, we can see: Based on Case 0, 
+    (1)Call Option value will increase(decrease) when
+    $ S_1(0)\&S_2(0) /  T / \sigma_1 \& \sigma_2 / r / \rho$ 
+    increase(decrease), or $ K$ decrease(increase); 
+    (2)Put Option value will increase(decrease) when
+    $ K / T / \sigma_1\&\sigma_2 / \rho$ increases(decreases), 
+    or $ S_1(0)\&S_2(0) / r$ decreases(increases).
 
 
 
@@ -668,22 +684,64 @@
             \hline
     \end{tabular}
         }
-    \end{table}
+        \footnotesize
 
-    Default random seed is 10. 
-    \texttt{0*} is using 5 as random seed.
     $Call_0$ and $Put_0$ are the result without control,
     $Call_1$ and $Put_1$ are the result with control variate.
 
+    Default random seed is 10. 
+    Case $0^*$ is using 5 as random seed.
+    \end{table}
+
+    
+
     From \hyperref[T7]{Table 7}, we can see: Based on Case 0, 
-    (1)Call Option value increases(decreases) if
-    $ S_1(0)\&S_2(0) /  T $ 
-    $/ \sigma_1 \& \sigma_2 / r / \rho$ 
+    (1)Call Option value will increase(decrease) when
+    $ S_1(0)\&S_2(0) /  T / \sigma_1 \& \sigma_2 / r / \rho$ 
     increase(decrease), or $ K$ decrease(increase); 
-    (2)Put Option value increases(decreases) when
-    $ K / T / \sigma_1\&\sigma_2$ 
-    $ / \rho$ increases(decreases), 
+    (2)Put Option value will increase(decrease) when
+    $ K / T / \sigma_1\&\sigma_2 / \rho$ increases(decreases), 
     or $ S_1(0)\&S_2(0) / r$ decreases(increases).
+
+
+    \textbf{Summary:}
+    \begin{enumerate}[(1)]
+    \item Based on our cases, usually
+    \texttt{Stock Price($S(0)$)/Volatility($\sigma$)/ 
+    Interest rate($r$)}
+    and \texttt{Call Option value}
+    are positively correlated; meanwhile
+    \texttt{Strike Price($K$)/Volatility($\sigma$)}
+    and \texttt{Put Option value}
+    are positively correlated;
+
+    \item Based on our cases, usually
+    \texttt{Call Option value} and 
+    \texttt{Strike Price($K$)}
+    are negatively correlated; meanwhile
+    \texttt{Put Option value} and 
+    \texttt{Stock Price($S(0)$)/Interest rate($r$)}
+    are negatively correlated.
+
+    \item Based on our cases,
+    \texttt{Maturity Time($K$)} sometime is 
+    positively correlated with \texttt{Option Value},
+    sometime is 
+    negatively correlated with \texttt{Option Value}.
+    \end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -711,7 +769,7 @@
         \hline
         UI Design && $\surd$ & \\
         \hline
-        Test & $\surd$ & &  \\
+        Test & $\surd$ & $\surd$ & $\surd$ \\
         \hline
         Report & $\surd$ & $\surd$ &  \\
         \hline
