@@ -16,7 +16,7 @@ function AmericanOption() {
     const [r, setR] = useState(0.05);
     const [T, setT] = useState(3);
     const [K, setK] = useState(100);
-    const [N, setN] = useState(1);
+    const [N, setN] = useState(5);
     const [result, setResult] = useState(null);
     const [loading, setLoading] = useState(false);
 

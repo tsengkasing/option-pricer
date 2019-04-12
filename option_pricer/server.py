@@ -212,8 +212,8 @@ def response_json(status, msg, data):
 
 if __name__ == '__main__':
     try:
-        import webbrowser
-        webbrowser.open('http://localhost:3721')
+        import webbrowser, threading
+        threading.Timer(1.25, lambda: webbrowser.open('http://localhost:3721')).start()
     except:
         print('Fail to open browser automatically.')
     print('Please Open Browser and visit http://localhost:3721')
